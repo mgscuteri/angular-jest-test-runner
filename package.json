@@ -8,6 +8,7 @@
     "url": "https://github.com/janeriklysander/angular-test-runner"
   },
   "version": "0.0.1",
+  "publisher": "janeriklysander",
   "engines": {
     "vscode": "^1.52.0"
   },
