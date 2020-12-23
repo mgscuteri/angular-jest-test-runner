@@ -2,6 +2,11 @@
   "name": "angular-test-runner",
   "displayName": "Angular test runner",
   "description": "Enables you to run and debug induvidual test files and tests using Angular CLI",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/janeriklysander/angular-test-runner"
+  },
   "version": "0.0.1",
   "engines": {
     "vscode": "^1.52.0"
