@@ -1,0 +1,70 @@
+{
+  "name": "angular-test-runner",
+  "displayName": "Angular test runner",
+  "description": "Enables you to run and debug induvidual test files and tests using Angular CLI",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.52.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "workspaceContains:**/angular.json"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "title": "Enable Angular Test Runner CodeLens",
+        "command": "angular-test-runner.enableCodeLens",
+        "category": "Angular Test Runner"
+      },
+      {
+        "title": "Disable Angular Test Runner Codelens",
+        "command": "angular-test-runner.disableCodeLens",
+        "category": "Angular Test Runner"
+      }
+    ],
+    "configuration": {
+      "title": "Angular Test Runner",
+      "properties": {
+        "angular-test-runner.enableCodeLens": {
+          "type": "boolean",
+          "default": true
+        },
+        "angular-test-runner.debug.projectPath": {
+          "type": "string",
+          "default": "",
+          "description": "Will default to workspace root (example: ./path/to/angular/root)"
+        },
+        "angular-test-runner.debug.ngPath": {
+          "type": "string",
+          "default": "",
+          "description": "Will default to ./node_modules/@angular/cli/bin/ng"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src --ext ts",
+    "test": "node ./out/test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.52.0",
+    "@types/glob": "^7.1.3",
+    "@types/mocha": "^8.0.4",
+    "@types/node": "^12.11.7",
+    "eslint": "^7.15.0",
+    "@typescript-eslint/eslint-plugin": "^4.9.0",
+    "@typescript-eslint/parser": "^4.9.0",
+    "glob": "^7.1.6",
+    "mocha": "^8.1.3",
+    "typescript": "^4.1.2",
+    "vscode-test": "^1.4.1"
+  }
+}
