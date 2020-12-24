@@ -7,7 +7,7 @@ version: 2
 defaults: &defaults
   working_directory: ~/repo
   docker:
-    - image: circleci/node:8.9.1
+    - image: 'cimg/node:14.14.0'
 
 jobs:
   publish:
@@ -20,7 +20,7 @@ jobs:
             - v1-dependencies-{{ checksum "package.json" }}
             - v1-dependencies-
 
-      - run: npm install
+      - run: npm ci
       - run:
           name: Publish app
           command: vsce publish -p $VSCODE_MARKETPLACE_TOKEN
