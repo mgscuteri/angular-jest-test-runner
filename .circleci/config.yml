@@ -14,11 +14,10 @@ jobs:
     <<: *defaults
     steps:
       - checkout
-      - run: npm install -g vsce
       - run: npm ci
       - run:
           name: Publish app
-          command: vsce publish -p $VSCODE_MARKETPLACE_TOKEN
+          command: ./node_modules/vsce/out/vsce publish -p $VSCODE_MARKETPLACE_TOKEN
 
 workflows:
   version: 2
