@@ -7,6 +7,9 @@ import constants from './constants';
 export class CodelensProvider implements vscode.CodeLensProvider {
   private codeLenses: vscode.CodeLens[] = [];
   private regex: RegExp;
+  private config: vscode.WorkspaceConfiguration = vscode.workspace.getConfiguration(
+    `${constants.extensionName}.codelens`
+  );
   private _onDidChangeCodeLenses: vscode.EventEmitter<void> = new vscode.EventEmitter<void>();
   public readonly onDidChangeCodeLenses: vscode.Event<void> = this
     ._onDidChangeCodeLenses.event;
@@ -66,11 +69,14 @@ export class CodelensProvider implements vscode.CodeLensProvider {
     fileName: string,
     line: vscode.TextLine
   ): vscode.Command {
+    const label =
+      this.config.get<string>('runLabel', '$(beaker) Run Test') ||
+      '$(beaker) Run Test';
     return this.generateCodeLensCommand(
       fileName,
       line,
       `${constants.extensionName}.runTest`,
-      'Run Test'
+      label
     );
   }
 
@@ -78,11 +84,14 @@ export class CodelensProvider implements vscode.CodeLensProvider {
     fileName: string,
     line: vscode.TextLine
   ): vscode.Command {
+    const label =
+      this.config.get<string>('debugLabel', '$(bug) Debug Test') ||
+      '$(bug) Debug Test';
     return this.generateCodeLensCommand(
       fileName,
       line,
       `${constants.extensionName}.debugTest`,
-      'Debug Test'
+      label
     );
   }
 

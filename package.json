@@ -1,6 +1,6 @@
 {
-  "name": "angular-test-runner",
-  "displayName": "Angular Test Runner",
+  "name": "angular-jest-test-runner",
+  "displayName": "Angular Jest Test Runner",
   "description": "Enables you to run and debug induvidual test files and tests using Angular CLI",
   "license": "MIT",
   "repository": {
@@ -22,29 +22,39 @@
   "contributes": {
     "commands": [
       {
-        "title": "Enable Angular Test Runner CodeLens",
-        "command": "angular-test-runner.enableCodeLens",
-        "category": "Angular Test Runner"
+        "title": "Enable CodeLens",
+        "command": "angular-jest-test-runner.enableCodeLens",
+        "category": "Angular Jest Test Runner"
       },
       {
-        "title": "Disable Angular Test Runner Codelens",
-        "command": "angular-test-runner.disableCodeLens",
-        "category": "Angular Test Runner"
+        "title": "Disable Codelens",
+        "command": "angular-jest-test-runner.disableCodeLens",
+        "category": "Angular Jest Test Runner"
       }
     ],
     "configuration": {
-      "title": "Angular Test Runner",
+      "title": "Angular Jest Test Runner",
       "properties": {
-        "angular-test-runner.enableCodeLens": {
+        "angular-jest-test-runner.codelens.enable": {
           "type": "boolean",
           "default": true
         },
-        "angular-test-runner.debug.projectPath": {
+        "angular-jest-test-runner.codelens.runLabel": {
+          "type": "string",
+          "default": "$(beaker) Run Test",
+          "description": "The label used in the codelens, can use octicons. Default: $(beaker) Run Test"
+        },
+        "angular-jest-test-runner.codelens.debugLabel": {
+          "type": "string",
+          "default": "$(bug) Debug Test",
+          "description": "The label used in the codelens, can use octicons. Default: $(bug) Debug Test"
+        },
+        "angular-jest-test-runner.debug.projectPath": {
           "type": "string",
           "default": "",
           "description": "Will default to workspace root (example: ./path/to/angular/root)"
         },
-        "angular-test-runner.debug.ngPath": {
+        "angular-jest-test-runner.debug.ngPath": {
           "type": "string",
           "default": "",
           "description": "Will default to ./node_modules/@angular/cli/bin/ng"

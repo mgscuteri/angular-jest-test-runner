@@ -1,4 +1,3 @@
 export default {
-  extensionName: 'angular-test-runner',
-  displayName: 'Angular Test Runner',
+  extensionName: 'angular-jest-test-runner',
 };

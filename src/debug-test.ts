@@ -1,25 +1,47 @@
-import { workspace, Uri, DebugConfiguration, debug } from 'vscode';
+import { workspace, Uri, DebugConfiguration, debug, window } from 'vscode';
 import constants from './constants';
+import * as fs from 'fs';
+import { join } from 'path';
 
-export function debugTest(fileName: string, testName: string) {
+export async function debugTest(fileName: string, testName: string) {
   const workspaceFolder = workspace.getWorkspaceFolder(Uri.file(fileName));
-
   const relativePath = workspace.asRelativePath(fileName);
 
-  const ngPath = workspace
-    .getConfiguration(constants.extensionName)
-    .get('debug.ngPath', undefined);
-  const projectPath = workspace
-    .getConfiguration(constants.extensionName)
-    .get('debug.projectPath', undefined);
-  const config: DebugConfiguration = {
+  if (!workspaceFolder) {
+    const message =
+      'Could not find workspace folder, pleace specify project path in the config';
+    window.showErrorMessage(message);
+    throw new Error(message);
+  }
+
+  const config = workspace.getConfiguration(`${constants.extensionName}.debug`);
+  let program = config.get('ngPath', '');
+  let cwd = config.get('projectPath', '');
+
+  if (program.length === 0) {
+    program = './node_modules/@angular/cli/bin/ng';
+  }
+
+  if (cwd.length === 0) {
+    cwd = workspaceFolder.uri.fsPath;
+  }
+
+  const path: fs.PathLike = join(cwd, program);
+
+  if (!fs.existsSync(path)) {
+    const message = `Could not find ng executable? Please verify that you've provided correct paths in the config and that you have run npm install.`;
+    window.showErrorMessage(message);
+    throw new Error(message);
+  }
+
+  const debugConfig: DebugConfiguration = {
     name: 'test',
     type: 'node',
     request: 'launch',
-    program: ngPath || `./node_modules/@angular/cli/bin/ng`,
-    cwd: projectPath || workspaceFolder?.uri.fsPath,
+    program,
+    cwd,
     args: [
-      `${constants.extensionName}.debug-test`,
+      `test`,
       `--test-path-pattern=${relativePath}`,
       `--test-name-pattern=${testName}`,
     ],
@@ -28,5 +50,5 @@ export function debugTest(fileName: string, testName: string) {
     disableOptimisticBPs: true,
   };
 
-  debug.startDebugging(workspaceFolder, config);
+  debug.startDebugging(workspaceFolder, debugConfig);
 }

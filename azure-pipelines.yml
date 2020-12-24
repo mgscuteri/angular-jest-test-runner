@@ -17,5 +17,8 @@ steps:
 
   - script: |
       npm ci
+    displayName: 'Run npm install'
+
+  - script: |
       ./node_modules/vsce/out/vsce publish -p $(VSCODE_MARKETPLACE_TOKEN)
-    displayName: 'npm install and publish'
+    displayName: 'Publish to VSCode Marketplace'
