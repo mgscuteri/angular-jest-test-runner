@@ -4,7 +4,7 @@ import constants from "./constants";
 const taskType = `${constants.extensionName}.taskProvider`;
 
 export function runTestTask(fileName: string, testName: string): Task {
-  let testExecString = `node ./node_modules/@angular/cli/bin/ng.js test --test-path-pattern="${fileName}" --test-name-pattern="${testName}"`;
+  let testExecString = `node ./node_modules/@angular/cli/bin/ng.js test --test-path-pattern="${fileName}" --test-name-pattern="${testName} --code-coverage false"`;
 
   const cwd =
     workspace
