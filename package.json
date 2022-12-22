@@ -1,14 +1,14 @@
 {
-  "name": "angular-jest-test-runner",
-  "displayName": "Angular Jest Test Runner",
+  "name": "angular-ng-test-runner",
+  "displayName": "Jest ng-test Runner",
   "description": "Enables you to run and debug induvidual test files and tests using Angular CLI",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/janeriklysander/angular-test-runner"
+    "url": "https://github.com/mgscuteri/angular-jest-test-runner"
   },
-  "version": "0.2.0",
-  "publisher": "janeriklysander",
+  "version": "0.2.1",
+  "publisher": "MichaelScuteri",
   "engines": {
     "vscode": "^1.52.0"
   },
@@ -24,16 +24,16 @@
       {
         "title": "Enable CodeLens",
         "command": "angular-jest-test-runner.enableCodeLens",
-        "category": "Angular Jest Test Runner"
+        "category": "Jest ng-test Runner"
       },
       {
         "title": "Disable Codelens",
         "command": "angular-jest-test-runner.disableCodeLens",
-        "category": "Angular Jest Test Runner"
+        "category": "Jest ng-test Runner"
       }
     ],
     "configuration": {
-      "title": "Angular Jest Test Runner",
+      "title": "Jest ng-test Runner",
       "properties": {
         "angular-jest-test-runner.codelens.enable": {
           "type": "boolean",
